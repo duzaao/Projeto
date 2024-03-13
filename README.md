@@ -8,7 +8,7 @@ Este é um projeto de software desenvolvido como parte da disciplina MAC0350 - I
 ## Alunos
 Estudantes de Ciência da Computação pela USP:\
 **Eduardo Figueredo**\
-**Guilherme Wallace**\
+**Guilherme Wallace**
 
 ## Características
 * Criar flashcards: os usuários podem criar novos flash
