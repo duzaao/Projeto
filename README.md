@@ -1,6 +1,6 @@
  # USP-Cards
 
-  Projeto de memorização elaborado pelos alunos **Eduardo Figueredo Pacheco** e **Guilherme Wallace** na disciplina MAC0350 do departamento de Ciência da Computação do IME - USP.
+  Projeto de flashcards elaborado pelos alunos **Eduardo Figueredo Pacheco** e **Guilherme Wallace** na disciplina MAC0350 do departamento de Ciência da Computação do IME - USP.
 
   ## classes
 
@@ -8,3 +8,9 @@
   * Priority
   * Group 
 
+
+## Linguagens 
+
+* Kotlin
+* JS
+ 
