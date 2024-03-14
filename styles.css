@@ -1,0 +1,213 @@
+/* Estilos Gerais */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+   }
+   
+   .cabecalho {
+    position: fixed; /* Fixa o cabeçalho na posição */
+    top: 0; /* Alinha o cabeçalho ao topo da tela */
+    left: 0; /* Alinha o cabeçalho à esquerda da tela */
+    width: 100%; /* Garante que o cabeçalho ocupe a largura total da tela */
+    background-color: #633030; /* Define uma cor de fundo para o cabeçalho */
+    color: #fff; /* Define a cor do texto do cabeçalho */
+    padding: 20px 0; /* Adiciona um pouco de espaço interno */
+    z-index: 1000; /* Garante que o cabeçalho fique acima de outros elementos */
+}
+   
+   .titulo-heroi {
+    font-size: 3em; /* Torna o texto grande */
+    margin-bottom: 20px;
+    margin: 20px;
+    text-align: center; /* Centraliza o texto horizontalmente */
+    font-weight: bold; /* Torna o texto em negrito */
+    background-color: #ffffff; /* Adiciona uma cor de fundo */
+    border: 5px solid #000000; /* Adiciona uma borda */
+    padding: 10px; /* Adiciona um pouco de espaço interno para melhorar a aparência */
+    box-sizing: border-box; /* Garante que o padding seja incluído nas dimensões do elemento */
+}
+   
+   .vermelho {
+    color: #e74c3c;
+   }
+   
+   .mensagem-cabecalho {
+    font-size: 1.5em;
+    margin: 50px;
+   }
+
+   .mensagem-descer{
+    font-size: 1.2em;
+    margin:50px;
+   }
+   
+   /* Estilos para Modais */
+   .modal-content {
+    background-color: #f9f9f9;
+    border: none;
+    box-shadow: 0 5px 16px rgba(0,0,0,0.2);
+   }
+   
+   .modal-header, .modal-footer {
+    padding: 20px;
+    background-color: #5cb85c;
+    color: white;
+   }
+   
+   .modal-body {
+    padding: 20px;
+   }
+   
+   /* Estilos para Botões */
+   .modal-btn {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+   }
+   
+   .modal-btn:hover {
+    background-color: #27ae60;
+   }
+   
+   /* Estilos para Inputs */
+   input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+   }
+   
+   /* Estilos para Submit */
+   input[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+   }
+   
+   input[type="submit"]:hover {
+    background-color: #45a049;
+   }
+   
+   /* Estilos para Mensagens */
+   .mensagem-cadastro, .mensagem-login {
+    color: #3498db;
+    font-weight: bold;
+   }
+   
+   /* Estilos para o Container */
+   .container-fluid {
+    padding: 20px;
+   }
+   
+   /* Estilos para a Mão */
+   .container-mao-para-baixo {
+    display: inline-block;
+    margin-top: 20px;
+   }
+   
+   .glyphicon-hand-down {
+    font-size: 2em;
+    color: #3498db;
+   }
+
+   /* Ajuste o tamanho dos botões de inscrição e entrar */
+.inscrever, .entrar {
+    width: 100px; /* Ajuste o valor conforme necessário */
+    height: 50px; /* Ajuste o valor conforme necessário */
+    padding: 0; /* Remove o padding interno */
+    margin: 0; /* Remove o margin externo */
+    font-size: 14px; /* Ajuste o tamanho da fonte conforme necessário */
+}
+
+/* Posiciona os botões no fim da página */
+.inscrever, .entrar {
+    position: fixed;
+    bottom: 20px; /* Ajuste a distância do fundo conforme necessário */
+    right: 20px; /* Ajuste a distância da direita conforme necessário */
+}
+
+/* Estilos para os botões do cabeçalho */
+.modal-cadastro, .modal-login {
+    background-color: #6d0f70; /* Azul escuro */
+    color: white; /* Texto branco para contraste */
+    border: none; /* Remove a borda padrão */
+    padding: 10px 20px; /* Ajuste o padding conforme necessário */
+    margin: 0; /* Remove o margin externo */
+    font-size: 16px; /* Ajuste o tamanho da fonte conforme necessário */
+    cursor: pointer; /* Muda o cursor para indicar que é um botão */
+}
+
+/* Posiciona os botões no canto direito da página */
+.modal-cadastro{
+    position: fixed;
+    top: 50px; /* Ajuste a distância do topo conforme necessário */
+    right: 300px;
+
+}
+
+.modal-login {
+    position: fixed;
+    top: 50px; /* Ajuste a distância do topo conforme necessário */
+    right: 200px; /* Ajuste a distância da direita conforme necessário */
+}
+
+
+#quadrado {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%; /* Ajuste conforme necessário */
+    height: 20%; /* Ajuste conforme necessário */
+    background-color: #5a070700; /* Cor de fundo do quadrado */
+    z-index: 1000; /* Garante que o quadrado apareça acima de outros elementos */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Adiciona um pouco de espaço ao redor do conteúdo do modal */
+    box-sizing: border-box; /* Garante que o padding seja incluído nas dimensões do quadrado */
+}
+
+.container {
+    width: 100%; /* Faz o container ocupar a largura total da tela */
+    height: 100vh; /* Faz o container ocupar a altura total da tela */
+    margin: 0; /* Remove a margem */
+    padding: 20px; /* Adiciona um pouco de espaço interno */
+    box-sizing: border-box; /* Garante que o padding seja incluído nas dimensões do elemento */
+}
+
+.container-red {
+    background-color: rgb(195, 139, 218); /* Define a cor de fundo do primeiro container como vermelho */
+}
+
+.container-green {
+    background-color: rgb(134, 146, 114); /* Define a cor de fundo do segundo container como verde */
+}
+
+.container-blue {
+    background-color: rgb(139, 197, 197); /* Define a cor de fundo do terceiro container como azul */
+}
+
+.container h2 {
+    font-size: 2em; /* Define o tamanho da fonte do título */
+    color: #fff; /* Define a cor da fonte do título */
+    text-align: left; /* Alinha o título à direita */
+    margin-top: 20px; /* Adiciona espaço abaixo do título */
+    
+    margin-left:40px;
+}
