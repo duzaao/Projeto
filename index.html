@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>USP-Cards</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Certifique-se de que o caminho para o arquivo CSS está correto -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header class="cabecalho">
-        <h1>         USP-Cards</h1>
+        <h1>USP-Cards</h1>
         <button type="button" class="modal-cadastro modal-btn" data-toggle="modal" data-target="#modal-cadastro">Inscrever-se</button>
         <button type="button" class="modal-btn modal-login" data-toggle="modal" data-target="#modal-login">Entrar</button>
     </header>
@@ -24,8 +24,8 @@
                     <div class="modal-body">
                         <form id="cadastro" class="text-align-center">
                             <fieldset>
-                                <input type="text" name="credenciais[email]" placeholder="Email">
-                                <input type="password" name="credenciais[senha]" placeholder="Senha">
+                                <input type="text" name="credenciais[email]" id="email" placeholder="Email">
+                                <input type="password" name="credenciais[senha]" id="senha" placeholder="Senha">
                                 <input type="password" name="credenciais[confirmação_senha]" placeholder="Confirmar senha">
                                 <input type="submit" name="submit" value="Enviar">
                             </fieldset>
@@ -48,8 +48,8 @@
                     <div class="modal-body">
                         <form id="login" class="text-align-center">
                             <fieldset>
-                                <input type="text" name="credenciais[email]" placeholder="Email">
-                                <input type="password" name="credenciais[senha]" placeholder="Senha">
+                                <input type="text" name="credenciais[email]" id="email" placeholder="Email">
+                                <input type="password" name="credenciais[senha]" id="senha" placeholder="Senha">
                                 <input type="submit" name="submit" value="Enviar">
                             </fieldset>
                         </form>
@@ -62,30 +62,74 @@
         </div>
     </div>
 
-            <div class="hero">
-          <h1 id="titulo-heroi" class="titulo-heroi text-align-center">USP<span class="vermelho borrao">-</span>Cards</h1>
-          <h3 id="mensagem-cabecalho" class="mensagem-cabecalho text-align-center">Domine Idiomas, Linguagens de programação e Memorize qualquer coisa</h3>
-          <h3 id="mensagem-descer" class="mensagem-descer">
+    <div class="hero">
+        <h1 id="titulo-heroi" class="titulo-heroi text-align-center">USP<span class="vermelho borrao">-</span>Cards</h1>
+        <h3 id="mensagem-cabecalho" class="mensagem-cabecalho text-align-center">Domine Idiomas, Linguagens de programação e Memorize qualquer coisa</h3>
+        <h3 id="mensagem-descer" class="mensagem-descer">
             Role para baixo para saber mais
             <div class="container-mao-para-baixo">
-              <span class="glyphicon glyphicon-hand-down" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-hand-down" aria-hidden="true"></span>
             </div>
-          </h3>
-        </div>
+        </h3>
+    </div>
 
-<div class="container container-red">
-    <h2>O que são USP-Cards?</h2>
-    <p>CBla bla bla bla.</p>
-</div>
-<div class="container container-green">
-    <h2>Quem somos nós?</h2>
-    <p>Bla bla bla.</p>
-</div>
-<div class="container container-blue">
-    <h2>Como Acessar?</h2>
-    <p>Bla bla bla.</p>
-</div>
+    <div class="container container-red">
+        <h2>O que são USP-Cards?</h2>
+        <p>CBla bla bla bla.</p>
+    </div>
+    <div class="container container-green">
+        <h2>Quem somos nós?</h2>
+        <p>Bla bla bla.</p>
+    </div>
+    <div class="container container-blue">
+        <h2>Como Acessar?</h2>
+        <p>Bla bla bla.</p>
+    </div>
 
-    <script src="main.js"></script> <!-- Certifique-se de que o caminho para o arquivo JavaScript está correto -->
+    <script src="main.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var formCadastro = document.getElementById('cadastro');
+        var formLogin = document.getElementById('login');
+
+        formCadastro.addEventListener('submit', function(event) {
+            event.preventDefault();
+            var email = document.querySelector('#email').value;
+            var senha = document.querySelector('#senha').value;
+
+            fetch('/inscrever', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: email, password: senha }),
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+
+        formLogin.addEventListener('submit', function(event) {
+            event.preventDefault();
+            var email = document.querySelector('#email').value;
+            var senha = document.querySelector('#senha').value;
+
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: email, password: senha }),
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+    });
+    </script>
 </body>
 </html>

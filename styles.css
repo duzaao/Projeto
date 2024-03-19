@@ -144,11 +144,11 @@ input[type="submit"]:hover {
 /* Quadrado */
 #quadrado {
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 50%;
-    height: 20%;
+    height: 30%;
     background-color: #5a070700;
     z-index: 1000;
     display: flex;

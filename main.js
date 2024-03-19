@@ -44,3 +44,21 @@ document.addEventListener('DOMContentLoaded', function() {
         botao.addEventListener('click', fecharModal);
     });
 });
+
+botaoEntrar.addEventListener('click', function() {
+    var email = document.querySelector('#email').value;
+    var senha = document.querySelector('#senha').value;
+
+    fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email, password: senha }),
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+});
