@@ -43,6 +43,56 @@ document.addEventListener('DOMContentLoaded', function() {
     botoesFechar.forEach(function(botao) {
         botao.addEventListener('click', fecharModal);
     });
+
+
+    
+    var formCadastro = document.getElementById('cadastro');
+    var formLogin = document.getElementById('login');
+
+    formCadastro.addEventListener('submit', function(event) {
+        event.preventDefault();
+        var email = document.querySelector('#modal-cadastro #email').value; // Seleciona o campo de e-mail dentro do modal de cadastro
+        var senha = document.querySelector('#modal-cadastro #senha').value; // Seleciona o campo de senha dentro do modal de cadastro
+
+        fetch('/inscrever', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email, password: senha }),
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+        // Fecha o quadrado após o envio do formulário
+        fecharQuadrado();
+
+    })
+
+    formLogin.addEventListener('submit', function(event) { // Adiciona ouvinte de evento ao formulário de login
+        event.preventDefault();
+        var email = document.querySelector('#modal-login #email').value; // Seleciona o campo de e-mail dentro do modal de login
+        var senha = document.querySelector('#modal-login #senha').value; // Seleciona o campo de senha dentro do modal de login
+
+        fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email, password: senha }),
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+        // Fecha o quadrado após o envio do formulário
+        fecharQuadrado();
+    });
 });
 
 botaoEntrar.addEventListener('click', function() {
