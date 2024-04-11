@@ -96,4 +96,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+document.getElementById('card').addEventListener('click', function() {
+    var cardInner = this.querySelector('.flip-card-inner');
+    if (cardInner.style.transform === 'rotateY(180deg)') {
+        cardInner.style.transform = 'rotateY(0deg)';
+    } else {
+        cardInner.style.transform = 'rotateY(180deg)';
+    }
 });

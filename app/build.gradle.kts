@@ -15,38 +15,30 @@ plugins {
 }
 
 repositories {
-    // Use Maven Central for resolving dependencies.
-    mavenCentral()
+    mavenCentral() // or any other repository where Ktor artifacts are hosted
 }
+
 
 dependencies {
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
-
-    // Use the Kotlin JDK 8 standard library.
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
-    implementation ("io.ktor:ktor-server-core")
-    implementation ("io.ktor:ktor-server-netty")
-    implementation ("io.ktor:ktor-jackson")
-    implementation ("io.ktor:ktor-client-core")
-    implementation ("io.ktor:ktor-client-cio")
-    implementation ("io.ktor:ktor-client-jackson")
-    implementation ("io.ktor:ktor-client-logging")
-    implementation ("io.ktor:ktor-client-websockets")
+    // Ktor dependencies
+    implementation("io.ktor:ktor-server-netty:1.6.7")
+    implementation("io.ktor:ktor-server-core:1.6.7")
+    implementation("io.ktor:ktor-gson:1.6.7")
+    implementation("io.ktor:ktor-client-apache:1.6.7")
 
+    // MySQL JDBC connector
+    implementation("mysql:mysql-connector-java:8.0.26")
 
-
-    // This dependency is used by the application.
+    // Other dependencies
     implementation("com.google.guava:guava:30.1.1-jre")
 
-    // Use the Kotlin test library.
+    // Testing dependencies
     testImplementation("org.jetbrains.kotlin:kotlin-test")
-
-    // Use the Kotlin JUnit integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
-
-
 }
 
 application {
