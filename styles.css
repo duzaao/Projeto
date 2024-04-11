@@ -3,8 +3,9 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
 }
+
 
 /* Cabeçalho */
 .cabecalho {
@@ -12,28 +13,43 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #633030;
-    color: #fff;
+    background: linear-gradient(to right, #ff8a00, #e52e71, #3399ff);
+    color: #ffffff;
     padding: 20px 0;
     z-index: 1000;
+    animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 /* Título Heroi */
 .titulo-heroi {
     font-size: 3em;
-    margin-bottom: 20px;
     text-align: center;
     font-weight: bold;
-    background-color: #ffffff;
-    border: 5px solid #000000;
+    background: linear-gradient(to right, #ff8a00, #e52e71, #3399ff);
+    -webkit-background-clip: text; /* Para navegadores WebKit (Safari, Chrome) */
+    -moz-background-clip: text; /* Para navegadores Mozilla (Firefox) */
+    background-clip: text; /* Padrão */
+    color: transparent; /* Torna o texto transparente para mostrar o gradiente de fundo */
     padding: 10px;
-    box-sizing: border-box;
 }
 
 /* Mensagens */
 .mensagem-cabecalho, .mensagem-descer {
     font-size: 1.5em;
     margin: 50px;
+    text-align: center;
 }
 
 /* Modais */
@@ -43,6 +59,15 @@ body {
     box-shadow: 0 5px 16px rgba(0,0,0,0.2);
     padding: 20px;
     color: white;
+}
+
+.modal-title {
+    background-color: #f9f9f9;
+    border: none;
+    box-shadow: 0 5px 16px rgba(0,0,0,0.2);
+    padding: 20px;
+    color: rgb(0, 0, 0);
+    text-align: center;
 }
 
 /* Botões */
@@ -159,23 +184,30 @@ input[type="submit"]:hover {
 }
 
 /* Containers de Cor */
-.container-red, .container-green, .container-blue {
+.container-red {
+    width: 100%;
+    height: 35vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgb(195, 139, 218);
+}
+
+.container-green {
+    width: 100%;
+    height: 85vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgb(255, 138, 42);
+}
+
+.container-blue {
     width: 100%;
     height: 100vh;
     margin: 0;
     padding: 20px;
     box-sizing: border-box;
-}
-
-.container-red {
-    background-color: rgb(195, 139, 218);
-}
-
-.container-green {
-    background-color: rgb(134, 146, 114);
-}
-
-.container-blue {
     background-color: rgb(139, 197, 197);
 }
 
@@ -186,4 +218,55 @@ input[type="submit"]:hover {
     margin-top: 20px;
     
     margin-left:40px;
+}
+
+
+.info-box {
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.info-box h3 {
+    color: #333;
+}
+
+.info-box p {
+    color: #666;
+}
+
+.mensagem-descer {
+    text-align: center; /* Centraliza o texto */
+    margin-bottom: 30px; /* Aumenta o espaço entre a mensagem e a seta */
+    position: relative; /* Habilita o posicionamento relativo para o elemento pai */
+}
+
+.mensagem-descer::after {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-left: 2px solid #000;
+    border-bottom: 2px solid #000;
+    transform: rotate(-45deg);
+    margin: auto;
+    margin-top: 10px; /* Ajuste conforme necessário */
+}
+
+.mensagem-descer::before {
+    content: attr(data-content); /* Utiliza o atributo data-content para o conteúdo */
+    display: block;
+    color: #000; /* Altere a cor do texto conforme necessário */
+    font-size: 16px; /* Altere o tamanho da fonte conforme necessário */
+    position: absolute; /* Habilita o posicionamento absoluto */
+    top: -20px; /* Posiciona o texto acima da seta */
+    left: 50%; /* Centraliza horizontalmente o texto */
+    transform: translateX(-50%); /* Centraliza horizontalmente o texto */
+}
+
+
+.cabecalho h1 {
+    text-align: center;
 }
