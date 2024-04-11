@@ -1,5 +1,5 @@
 /* Estilos Gerais */
-body {
+.main-body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -53,7 +53,7 @@ body {
 }
 
 /* Modais */
-.modal-content, .modal-header, .modal-footer, .modal-body {
+.modal-content, .modal-header, .modal-footer, .modal-x {
     background-color: #f9f9f9;
     border: none;
     box-shadow: 0 5px 16px rgba(0,0,0,0.2);
@@ -270,3 +270,121 @@ input[type="submit"]:hover {
 .cabecalho h1 {
     text-align: center;
 }
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 60px 20px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+h2 {
+    margin-bottom: 30px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+}
+
+.about-us,
+.social-media,
+.contact-info {
+    flex: 1;
+}
+
+.about-us,
+.social-media {
+    margin-right: 20px;
+}
+
+.about-us h3,
+.social-media h3,
+.contact-info h3 {
+    margin-bottom: 15px;
+}
+
+.about-us p,
+.social-media p,
+.contact-info p {
+    margin-bottom: 15px;
+}
+
+.about-us hr,
+.social-media hr,
+.contact-info hr {
+    border: 1px solid #fff;
+    margin-bottom: 20px;
+}
+
+.social-buttons {
+    margin-top: 10px;
+}
+
+.social-buttons a {
+    display: block;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.github,
+.instagram,
+.whatsapp {
+    background-color: #000; /* Cor dos botões */
+}
+
+.social-buttons a:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.flip-background{
+    background: linear-gradient(to right, #ff8a00, #e52e71, #3399ff);
+}
+.flip-card {
+    background-color: transparent;
+    /*como centralizar*/
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    height: 200px;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  }
+  
+  /* This container is needed to position the front and back side */
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  
+
+  /* Position the front and back side */
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+  }
+  
+  /* Style the front side (fallback if image is missing) */
+  .flip-card-front {
+    background-color: #bbb;
+    color: black;
+  }
+  
+  /* Style the back side */
+  .flip-card-back {
+    background-color: dodgerblue;
+    color: white;
+    transform: rotateY(180deg);
+  }
