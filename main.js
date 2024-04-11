@@ -44,7 +44,14 @@ document.addEventListener('DOMContentLoaded', function() {
         botao.addEventListener('click', fecharModal);
     });
 
+    function scrollToNextSection() {
+        var nextSection = document.querySelector('.container-red'); // Selecione a próxima seção
+        nextSection.scrollIntoView({ behavior: 'smooth' }); // Role suavemente até a próxima seção
+    }
 
+    // Adiciona um evento de clique à opção "Role para baixo para saber mais"
+    var mensagemDescer = document.getElementById('mensagem-descer');
+    mensagemDescer.addEventListener('click', scrollToNextSection);
     
     var formCadastro = document.getElementById('cadastro');
     var formLogin = document.getElementById('login');
