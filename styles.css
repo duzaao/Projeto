@@ -18,6 +18,7 @@
     padding: 20px 0;
     z-index: 1000;
     animation: gradientAnimation 10s ease infinite;
+    border-bottom: #000 5px solid;
 }
 
 @keyframes gradientAnimation {

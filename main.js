@@ -123,6 +123,8 @@ swipeRight.addEventListener('click', function(event) {
     }, 300);
 });
 
+
+
 card.addEventListener('click', function() {
     if (cardInner.style.transform === 'rotateY(180deg)') {
         cardInner.style.transform = 'rotateY(0deg)';
@@ -130,6 +132,8 @@ card.addEventListener('click', function() {
         cardInner.style.transform = 'rotateY(180deg)';
     }
 });
+
+
 
 function addNewCard() {
     var newCard = document.createElement('div');
@@ -183,6 +187,11 @@ function addNewCard() {
             newCardInner.style.transform = 'rotateY(180deg)';
         }
     });
+
+
+    
+
+
 
     setTimeout(function() {
         newCard.style.opacity = '1';
