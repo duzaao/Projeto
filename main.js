@@ -1,3 +1,4 @@
+'use strict';
 document.addEventListener('DOMContentLoaded', function() {
     var botaoInscrever = document.querySelector('.modal-cadastro');
     var botaoEntrar = document.querySelector('.modal-login');
@@ -44,14 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         botao.addEventListener('click', fecharModal);
     });
 
-    function scrollToNextSection() {
-        var nextSection = document.querySelector('.container-red'); // Selecione a próxima seção
-        nextSection.scrollIntoView({ behavior: 'smooth' }); // Role suavemente até a próxima seção
-    }
 
-    // Adiciona um evento de clique à opção "Role para baixo para saber mais"
-    var mensagemDescer = document.getElementById('mensagem-descer');
-    mensagemDescer.addEventListener('click', scrollToNextSection);
     
     var formCadastro = document.getElementById('cadastro');
     var formLogin = document.getElementById('login');
@@ -103,11 +97,96 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-document.getElementById('card').addEventListener('click', function() {
-    var cardInner = this.querySelector('.flip-card-inner');
+
+var card = document.getElementById('card');
+var cardInner = card.querySelector('.flip-card-inner');
+var swipeLeft = document.getElementById('swipeLeft');
+var swipeRight = document.getElementById('swipeRight');
+
+swipeLeft.addEventListener('click', function(event) {
+    event.stopPropagation();
+    var moveOutWidth = document.body.clientWidth;
+    cardInner.style.transform = 'translate(-' + moveOutWidth + 'px) rotateY(0deg)';
+    setTimeout(function() {
+        card.remove();
+        addNewCard();
+    }, 300);
+});
+
+swipeRight.addEventListener('click', function(event) {
+    event.stopPropagation();
+    var moveOutWidth = document.body.clientWidth ;
+    cardInner.style.transform = 'translate(' + moveOutWidth + 'px) rotateY(0deg)';
+    setTimeout(function() {
+        card.remove();
+        addNewCard();
+    }, 300);
+});
+
+card.addEventListener('click', function() {
     if (cardInner.style.transform === 'rotateY(180deg)') {
         cardInner.style.transform = 'rotateY(0deg)';
     } else {
         cardInner.style.transform = 'rotateY(180deg)';
     }
 });
+
+function addNewCard() {
+    var newCard = document.createElement('div');
+    newCard.classList.add('flip-card');
+    newCard.innerHTML = `
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <h1>Hello World!</h1>
+                <div class="tinder--buttons">
+                    <button class="swipeLeft" style="background-color: red;"><i class="fa fa-arrow-left"></i></button>
+                    <button class="swipeRight" style="background-color: green;"><i class="fa fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="flip-card-back">
+                <h1>Oi Mundo!</h1>
+                <p>Architect & Engineer</p>
+                <p>We love that guy</p>
+            </div>
+        </div>
+    `;
+    document.querySelector('.flip-background').appendChild(newCard);
+
+    var newCardInner = newCard.querySelector('.flip-card-inner');
+    var newSwipeLeft = newCard.querySelector('.swipeLeft');
+    var newSwipeRight = newCard.querySelector('.swipeRight');
+
+    newSwipeLeft.addEventListener('click', function(event) {
+        event.stopPropagation();
+        var moveOutWidth = document.body.clientWidth;
+        newCardInner.style.transform = 'translate(-' + moveOutWidth + 'px) rotateY(0deg)';
+        setTimeout(function() {
+            newCard.remove();
+            addNewCard();
+        }, 300);
+    });
+
+    newSwipeRight.addEventListener('click', function(event) {
+        event.stopPropagation();
+        var moveOutWidth = document.body.clientWidth;
+        newCardInner.style.transform = 'translate(' + moveOutWidth + 'px) rotateY(0deg)';
+        setTimeout(function() {
+            newCard.remove();
+            addNewCard();
+        }, 300);
+    });
+
+    newCard.addEventListener('click', function() {
+        if (newCardInner.style.transform === 'rotateY(180deg)') {
+            newCardInner.style.transform = 'rotateY(0deg)';
+        } else {
+            newCardInner.style.transform = 'rotateY(180deg)';
+        }
+    });
+
+    setTimeout(function() {
+        newCard.style.opacity = '1';
+        newCard.style.transform = 'translateY(0)';
+    }, 50);
+    
+}
