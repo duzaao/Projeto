@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USP-Cards</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="cabecalho">
+        <h1>USP-Cards</h1>
+        <button type="button" class="modal-btn modal-login" id="logoutButton">Sair</button>
+    </header>
+
+
+<div class="flip-background-oi">
+    <div class="y">
+        <div class="flip-letra_T-oi">Bem-vindo ao USP-Cards</div>
+        <br>
+        <div class="flip-letra-oi">Aqui estão suas cartas: Se você Já memorizou essa carta, aperte o botão verde, caso contrário, aperte o vermelho e ela aparecerá com mais frequência</div>
+    </div>
+    <div class="flip-card" id="card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <h1>Hello World!</h1>
+                <div class="tinder--buttons">
+                    <button id="swipeLeft" style="background-color: red;"><i class="fa fa-arrow-left"></i></button>
+                    <button id="swipeRight" style="background-color: green;"><i class="fa fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="flip-card-back">
+                <h1>Oi Mundo!</h1>
+                <p>Architect & Engineer</p>
+                <p>We love that guy</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="main.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var logoutButton = document.getElementById('logoutButton');
+
+        logoutButton.addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    });
+</script>
+</html>
+
+

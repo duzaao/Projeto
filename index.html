@@ -172,6 +172,28 @@
             });
         });
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var formCadastro = document.getElementById('cadastro');
+        var formLogin = document.getElementById('login');
+
+        // Função para redirecionar para oi.html
+        function redirectToOi() {
+            window.location.href = 'oi.html';
+        }
+
+        formCadastro.addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Aqui você pode adicionar a lógica de envio dos dados do formulário de cadastro, se necessário
+            redirectToOi();
+        });
+
+        formLogin.addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Aqui você pode adicionar a lógica de envio dos dados do formulário de login, se necessário
+            redirectToOi();
+        });
+    });
     </script>
 </body>
 

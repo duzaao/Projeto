@@ -442,3 +442,51 @@ h2 {
     width: 100%;
     z-index: 1;
 }
+
+.y{
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    padding-top: 150px;
+
+}
+
+
+/* oi.html */
+
+.flip-background-oi{
+    background: linear-gradient(to right, #705433, #5f0728, #144f8a);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    padding-top: 350px;
+    text-align: center;
+    position: relative;
+    
+}
+
+/* Classe para uma letra grande */
+.flip-letra-oi {
+    font-size: 2em; /* Ajuste o tamanho conforme necessário */
+    color: white;
+    font-family: 'Pacifico', cursive; /* Use a fonte importada */
+    margin-left: 80px;
+    margin-top: 20px; /* Aumenta o espaço entre as letras */
+    margin-right: 80px;
+}
+
+/* Classe para uma letra ainda maior */
+.flip-letra_T-oi {
+    font-size: 3em; /* Ajuste o tamanho conforme necessário */
+    color: white;
+    font-family: 'Pacifico', cursive; /* Use a fonte importada */
+    margin-top: 20px; /* Aumenta o espaço entre as letras */
+    
+}
