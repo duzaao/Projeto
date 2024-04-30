@@ -490,3 +490,44 @@ h2 {
     margin-top: 20px; /* Aumenta o espaço entre as letras */
     
 }
+
+
+/* Criação de nova Carta*/
+
+  
+  h1 {
+    text-align:center;
+  }
+  
+  form.new-bill-form {
+    max-width:25rem;
+    border: 0.1rem solid #353340;
+    border-radius:0.5rem;
+    padding:1rem;
+    margin:auto;
+  }
+  
+  input.user-invalid,
+  select.user-invalid {
+    border:0.1rem solid tomato;
+  } /* input field outlined in red if user tries to submit an invalid value*/
+  
+  input,
+  select,
+  textarea {
+    border-radius:0.25rem;
+  }
+  
+  div.bill-section {
+    display:flex;
+    flex-direction:column;
+  }
+  
+  
+  textarea {
+    resize:none;
+  }
+  
+
+/* Text size must be at least 1rem to prevent auto zoom on ios source: https://css-tricks.com/16px-or-larger-text-prevents-ios-form-zoom/ */
+
