@@ -22,9 +22,7 @@ fun main() {
 }
 
 fun Application.module() {
-    install(ContentNegotiation) {
-        json()
-    }
+
     val database = Database.connect(
         url = "jdbc:h2:file:./database/db;MODE=MySQL",
         user = "root",
@@ -32,5 +30,9 @@ fun Application.module() {
         password = ""
     )
     val service = NoteService(database)
+
+    configureHTTP()
+    configureRouting()
+    configureSerialization()
     configureNoteRouting(service)
 }
