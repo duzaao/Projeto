@@ -470,6 +470,19 @@ h2 {
     text-align: center;
     position: relative;
     
+    
+}
+
+.flip-background-oii{
+    background: linear-gradient(to right, #705433, #5f0728, #144f8a);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    padding-bottom: 400px;
+    text-align: center;
+    position: relative;
+    
 }
 
 /* Classe para uma letra grande */
@@ -528,6 +541,70 @@ h2 {
     resize:none;
   }
   
+  .custom-row {
+    display: flex;
+    gap: 20px;
+}
 
-/* Text size must be at least 1rem to prevent auto zoom on ios source: https://css-tricks.com/16px-or-larger-text-prevents-ios-form-zoom/ */
 
+  .custom-container {
+    display: grid;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px;
+    margin: auto;
+}
+
+.custom-box {
+    width: 400px;
+    height: 400px;
+    background-color: #e0df9b;
+    border-radius: 15px;
+    padding: 10px;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+.custom-textarea {
+    width: 99%;
+    height: 75%;
+    resize: none;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    text-align: distribute-all-lines;
+}
+
+
+
+.submit-button,
+.clear-button {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.submit-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.clear-button {
+    background-color: yellow;
+    color: black;
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+}
+
+.submit-button:not(:last-child) {
+    margin-right: 10px;
+}

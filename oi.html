@@ -14,6 +14,9 @@
     </header>
 
 
+
+
+
 <div class="flip-background-oi">
     <div class="y">
         <div class="flip-letra_T-oi">Bem-vindo ao USP-Cards</div>
@@ -39,58 +42,35 @@
 </div>
 
 
-<form method ="post" action="#" class="new-bill-form"> <!-- Add URL to send info to backend-->
-  <h1>Criação de novo Card</h1>
-    <label for="category">Grupo</label>
-    <select id="category" name="category" required>
-      <option value="">--Please choose an option--</option>
-      <optgroup label="Idiomas">
-        <option value="ingles">Inglês</option>
-        <option value="espanhol">Espanhol</option>
-        <option value="portugues">Português</option>
-        <option value="frances">Francês</option>
-      </optgroup>
-      <optgroup label="Programação">
-        <option value="python">Python</option>
-        <option value="java">Java</option>
-        <option value="c">C</option>
-        <option value="c++">C++</option>
-      </optgroup>
-      <optgroup label="Matérias da USP">
-        <option value="engenharia">Engenharia</option>
-        <option value="medicina">Medicina</option>
-        <option value="direito">Direito</option>
-        <option value="economia">Economia</option>
-      </optgroup>
-    </select>
-  </div>
-  <div class="bill-section grupo">
-    <label for="name">Frente - Título</label>
-    <input type="text" id="name" name="name" placeholder="Hello World" maxlength="50" required>
-  </div>
-  <div class="bill-section grupo">
-    <label for="name">Frente - frase</label>
-    <input type="text" id="name" name="name" placeholder="I just said hello world!" maxlength="50" required>
-  </div>
-  <div class="bill-section grupo">
-    <label for="name">Verso - Título</label>
-    <input type="text" id="name" name="name" placeholder="Olá mundo!" maxlength="50" required>
-  </div>
-    <div class="bill-section grupo">
-    <label for="name">Verso - frase</label>
-    <input type="text" id="name" name="name" placeholder="Alan Turing" maxlength="50" required>
-  </div>
-  <div class="bill-section prioridade">
-    <label for="priority">Prioridade</label>
-    <input type="number" id="priority" name="priority" min="1-10" max="10" placeholder="1" required>
-  </div>
+<div class="flip-background-oii">
+    <div class="custom-container">
+        <div class="custom-row">
+            <div class="custom-box">
+                <h2>Frente - Título</h2>
+                <textarea class="custom-textarea" id="titleFront" rows="4" cols="30" placeholder="Titulo da frente"></textarea>
+            </div>
+            <div class="custom-box">
+                <h2>Frente - Frase</h2>
+                <textarea class="custom-textarea" id="messageFront" rows="4" cols="30" placeholder="Mensagem da frente"></textarea>
+            </div>
+        </div>
+        <div class="custom-row">
+            <div class="custom-box">
+                <h2>Verso - Título</h2>
+                <textarea class="custom-textarea" id="titleBack" rows="4" cols="30" placeholder="Titulo de trás"></textarea>
+            </div>
+            <div class="custom-box">
+                <h2>Verso - Frase</h2>
+                <textarea class="custom-textarea" id="messageBack" rows="4" cols="30" placeholder="Mensagem de trás"></textarea>
+            </div>
+        </div>
+        <div class="button-row">
+            <button class="submit-button">Enviar</button>
+            <button id="clearButton" class="clear-button">Limpar</button>
 
-  <div class="bill-section">
-    <input type="submit" value="Submit">
-  </div>
-</form>
-
-
+        </div>
+    </div>
+</div>
 
 
 

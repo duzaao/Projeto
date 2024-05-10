@@ -107,6 +107,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+//limpar caixa de texto
+document.addEventListener('DOMContentLoaded', function() {
+    var clearButton = document.getElementById('clearButton');
+
+    clearButton.addEventListener('click', function() {
+        var textAreas = document.querySelectorAll('.custom-textarea');
+        textAreas.forEach(function(textArea) {
+            textArea.value = ''; // Limpa o conteúdo da caixa de texto
+        });
+    });
+});
+
+
 
 
 var card = document.getElementById('card');
@@ -120,7 +133,7 @@ swipeLeft.addEventListener('click', function(event) {
     cardInner.style.transform = 'translate(-' + moveOutWidth + 'px) rotateY(0deg)';
     setTimeout(function() {
         card.remove();
-        addNewCard();
+        
     }, 300);
 });
 
@@ -130,7 +143,7 @@ swipeRight.addEventListener('click', function(event) {
     cardInner.style.transform = 'translate(' + moveOutWidth + 'px) rotateY(0deg)';
     setTimeout(function() {
         card.remove();
-        addNewCard();
+        
     }, 300);
 });
 
@@ -146,26 +159,26 @@ card.addEventListener('click', function() {
 
 
 
-function addNewCard() {
+function addNewCard(data,titleFront, messageFront, titleBack, messageBack, i, length) {
     var newCard = document.createElement('div');
     newCard.classList.add('flip-card');
     newCard.innerHTML = `
         <div class="flip-card-inner">
             <div class="flip-card-front">
-                <h1>Hello World!</h1>
+                <h1>${titleFront}</h1>
+                <p>${messageFront}</p>
                 <div class="tinder--buttons">
                     <button class="swipeLeft" style="background-color: red;"><i class="fa fa-arrow-left"></i></button>
                     <button class="swipeRight" style="background-color: green;"><i class="fa fa-arrow-right"></i></button>
                 </div>
             </div>
             <div class="flip-card-back">
-                <h1>Oi Mundo!</h1>
-                <p>Architect & Engineer</p>
-                <p>We love that guy</p>
+                <h1>${titleBack}</h1>
+                <p>${messageBack}</p>
             </div>
         </div>
     `;
-    document.querySelector('.flip-background').appendChild(newCard);
+    document.querySelector('.flip-background-oi').append(newCard);
 
     var newCardInner = newCard.querySelector('.flip-card-inner');
     var newSwipeLeft = newCard.querySelector('.swipeLeft');
@@ -177,7 +190,8 @@ function addNewCard() {
         newCardInner.style.transform = 'translate(-' + moveOutWidth + 'px) rotateY(0deg)';
         setTimeout(function() {
             newCard.remove();
-            addNewCard();
+            i = (i + 1) % length;
+            addNewCard(data,data[i].title, data[i].message, data[i].title, data[i].message, i, length);
         }, 300);
     });
 
@@ -187,7 +201,8 @@ function addNewCard() {
         newCardInner.style.transform = 'translate(' + moveOutWidth + 'px) rotateY(0deg)';
         setTimeout(function() {
             newCard.remove();
-            addNewCard();
+            i = (i + 1) % length;
+            addNewCard(data,data[i].title, data[i].message, data[i].title, data[i].message, i, length);
         }, 300);
     });
 
@@ -199,14 +214,32 @@ function addNewCard() {
         }
     });
 
-
-    
-
-
-
     setTimeout(function() {
         newCard.style.opacity = '1';
         newCard.style.transform = 'translateY(0)';
     }, 50);
+}
+
+function setCards(data, i, length) {
+   addNewCard(data,data[i].title, data[i].message, data[i].title, data[i].message, i, length);
     
 }
+
+    function fetchNotesAndAddCards() {
+        fetch('http://localhost:8080/notes')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao obter os dados');
+                }
+                return response.json();
+            })
+            .then(data => {
+                var length = data.length;
+                setCards(data, 0, length);
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+    }
+
+    fetchNotesAndAddCards();
