@@ -316,8 +316,8 @@ function setCards(data, i, length) {
         var titleBack = document.getElementById('titleBack').value;
         var messageBack = document.getElementById('messageBack').value;
         
-        
-        if (titleFront === '' || messageFront === '' || titleBack === '' || messageBack === '') {
+
+        if (titleFront === '') {
             alert('Por favor, preencha todos os campos.');
             return; // Impede o envio do formulário se algum campo estiver vazio
         }
@@ -351,6 +351,11 @@ function setCards(data, i, length) {
             console.error('Erro:', error);
         });
     });
+});
+
+
+document.getElementById('DeleteButton').addEventListener('click', function() {
+    window.location.href = 'deletion.html'; // Redireciona para oi.html ao clicar no botão "Voltar"
 });
 
     

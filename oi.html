@@ -11,6 +11,7 @@
     <header class="cabecalho">
         <h1>USP-Cards</h1>
         <button type="button" class="modal-btn modal-login" id="logoutButton">Sair</button>
+        <button type="button" class="modal-btn modal-login" id="DeleteButton">Deleção</button>
     </header>
 
 
@@ -83,12 +84,19 @@
 <script src="main.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var logoutButton = document.getElementById('logoutButton');
+    var logoutButton = document.getElementById('logoutButton');
 
-        logoutButton.addEventListener('click', function() {
+    logoutButton.addEventListener('click', function() {
+        // Exibe um aviso de confirmação
+        var confirmLogout = confirm('Tem certeza que deseja sair?');
+
+        // Se o usuário confirmar, redireciona para index.html
+        if (confirmLogout) {
             window.location.href = 'index.html';
-        });
+        }
     });
+});
+
 </script>
 </html>
 

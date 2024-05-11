@@ -627,3 +627,23 @@ h2 {
     0% { opacity: 1; } /* Define a opacidade inicial */
     100% { opacity: 0; } /* Define a opacidade final */
 }
+
+
+/* Estilo para o contêiner de cartas */
+#cardContainer {
+    display: flex; /* Use o flexbox para alinhar as cartas */
+    flex-wrap: wrap; /* Permita que as cartas quebrem para a próxima linha */
+    justify-content: center; /* Centralize as cartas horizontalmente */
+    padding: 0 300px; /* Adicione margens laterais */
+    box-sizing: border-box; /* Inclua a largura das margens no cálculo total da largura */
+    margin-top: 200px; /* Adicione espaço acima do contêiner */
+}
+
+#voltarButton {
+    margin-right: 80px; /* Adiciona margem à direita para distanciar do botão "Sair" */
+}
+
+#DeleteButton {
+    margin-right: 80px; /* Adiciona margem à direita para distanciar do botão "Sair" */
+}
+
