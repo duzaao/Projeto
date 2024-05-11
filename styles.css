@@ -608,3 +608,22 @@ h2 {
 .submit-button:not(:last-child) {
     margin-right: 10px;
 }
+
+
+#mensagem {
+    color: white; /* Define a cor do texto como branco */
+    background-color: rgba(43, 5, 5, 0.7); /* Define a cor de fundo com transparência */
+    padding: 10px; /* Adiciona espaço interno à mensagem */
+    position: fixed; /* Define a posição fixa para a mensagem */
+    top: 90%; /* Posiciona a parte superior da mensagem no centro vertical */
+    left: 50%; /* Posiciona a parte esquerda da mensagem no centro horizontal */
+    transform: translate(-50%, -50%); /* Centraliza horizontal e verticalmente */
+    border-radius: 5px; /* Adiciona borda arredondada */
+    display: none; /* Oculta a mensagem por padrão */
+    animation: fadeOut 4s forwards; /* Adiciona animação para desaparecer após 5 segundos */
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; } /* Define a opacidade inicial */
+    100% { opacity: 0; } /* Define a opacidade final */
+}

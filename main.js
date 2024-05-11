@@ -309,31 +309,48 @@ function setCards(data, i, length) {
 
 
 
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelector('.submit-button').addEventListener('click', function() {
-            var titleFront = document.getElementById('titleFront').value;
-            var messageFront = document.getElementById('messageFront').value;
-            var titleBack = document.getElementById('titleBack').value;
-            var messageBack = document.getElementById('messageBack').value;
-    
-            var data = {
-                title: titleFront,
-                message: messageFront
-            };
-            console.log(data);
-    
-            fetch('http://localhost:8080/notes', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)})
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao enviar os dados');
-                }
-                console.log('Dados enviados com sucesso');
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-            });
-        });
-    
+   document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.submit-button').addEventListener('click', function() {
+        var titleFront = document.getElementById('titleFront').value;
+        var messageFront = document.getElementById('messageFront').value;
+        var titleBack = document.getElementById('titleBack').value;
+        var messageBack = document.getElementById('messageBack').value;
+        
+        
+        if (titleFront === '' || messageFront === '' || titleBack === '' || messageBack === '') {
+            alert('Por favor, preencha todos os campos.');
+            return; // Impede o envio do formulário se algum campo estiver vazio
+        }
 
+        var data = {
+            title: titleFront,
+            message: messageFront
+        };
+        console.log(data);
+
+        fetch('http://localhost:8080/notes', { 
+            method: 'POST', 
+            headers: {'Content-Type': 'application/json'}, 
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao enviar os dados');
+            }
+            document.getElementById('mensagem').style.display = 'block';
+            console.log('Dados enviados com sucesso');
+            var textAreas = document.querySelectorAll('.custom-textarea');
+            textAreas.forEach(function(textArea) {
+                textArea.value = ''; // Limpa o conteúdo da caixa de texto
+            });
+            setTimeout(function() {
+                document.getElementById('mensagem').style.display = 'none'; // Oculta a mensagem após 5 segundos
+            }, 5000);
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
     });
+});
+
     
