@@ -133,6 +133,7 @@ swipeLeft.addEventListener('click', function(event) {
     cardInner.style.transform = 'translate(-' + moveOutWidth + 'px) rotateY(0deg)';
     setTimeout(function() {
         card.remove();
+        fetchNotesAndAddCards();
         
     }, 300);
 });
@@ -143,6 +144,7 @@ swipeRight.addEventListener('click', function(event) {
     cardInner.style.transform = 'translate(' + moveOutWidth + 'px) rotateY(0deg)';
     setTimeout(function() {
         card.remove();
+        fetchNotesAndAddCards();
         
     }, 300);
 });
@@ -159,7 +161,33 @@ card.addEventListener('click', function() {
 
 
 
-function addNewCard(data,titleFront, messageFront, titleBack, messageBack, i, length) {
+function addNewCard(data, titleFront, messageFront, titleBack, messageBack, i, length, ATUALIZADO) {
+    // Chama a função para atualizar os dados apenas se ATUALIZADO for falso
+    if (ATUALIZADO === false) {
+        fetch('http://localhost:8080/notes')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao obter os dados');
+                }
+                return response.json();
+            })
+            .then(updatedData => {
+                // Atualiza os dados
+                data = updatedData;
+                length = data.length;
+
+                console.log(data); // Aqui você verá os dados atualizados
+                // Agora você pode chamar addNewCard ou fazer qualquer outra coisa com os dados atualizados
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+    }
+    // Você ainda pode acessar a variável data aqui fora do bloco if
+    console.log(data); // Aqui você verá os dados originais
+
+
+  
     var newCard = document.createElement('div');
     newCard.classList.add('flip-card');
     newCard.innerHTML = `
@@ -191,7 +219,7 @@ function addNewCard(data,titleFront, messageFront, titleBack, messageBack, i, le
         setTimeout(function() {
             newCard.remove();
             i = (i + 1) % length;
-            addNewCard(data,data[i].title, data[i].message, data[i].title, data[i].message, i, length);
+            addNewCard(data,data[i].title, data[i].message, data[i].title, data[i].message, i, length, false);
         }, 300);
     });
 
@@ -202,7 +230,7 @@ function addNewCard(data,titleFront, messageFront, titleBack, messageBack, i, le
         setTimeout(function() {
             newCard.remove();
             i = (i + 1) % length;
-            addNewCard(data,data[i].title, data[i].message, data[i].title, data[i].message, i, length);
+            addNewCard(data,data[i].title, data[i].message, data[i].title, data[i].message, i, length, false);
         }, 300);
     });
 
@@ -221,7 +249,7 @@ function addNewCard(data,titleFront, messageFront, titleBack, messageBack, i, le
 }
 
 function setCards(data, i, length) {
-   addNewCard(data,data[i].title, data[i].message, data[i].title, data[i].message, i, length);
+   addNewCard(data,data[i].title, data[i].message, data[i].title, data[i].message, i, length,true);
     
 }
 
@@ -242,4 +270,70 @@ function setCards(data, i, length) {
             });
     }
 
-    fetchNotesAndAddCards();
+    async function fetchNewData() {
+        try {
+            const response = await fetch('http://localhost:8080/notes');
+            console.log(response);
+            if (!response.ok) {
+                throw new Error('Erro ao obter a nova data');
+            }
+            const newData = await response.json();
+            return newData;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    }
+    
+    function fetchDataAndUpdate() {
+        fetchNewData()
+            .then(newData => {
+                if (newData) {
+                    data = newData;
+                    console.log('Dados atualizados:', data);
+                } else {
+                    console.log('Não foi possível obter os dados atualizados.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao buscar os dados:', error);
+            });
+    }
+    
+
+    
+    
+
+
+   // fetchNotesAndAddCards();
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.submit-button').addEventListener('click', function() {
+            var titleFront = document.getElementById('titleFront').value;
+            var messageFront = document.getElementById('messageFront').value;
+            var titleBack = document.getElementById('titleBack').value;
+            var messageBack = document.getElementById('messageBack').value;
+    
+            var data = {
+                title: titleFront,
+                message: messageFront
+            };
+            console.log(data);
+    
+            fetch('http://localhost:8080/notes', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)})
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao enviar os dados');
+                }
+                console.log('Dados enviados com sucesso');
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        });
+    
+
+    });
+    
