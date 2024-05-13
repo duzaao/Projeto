@@ -8,6 +8,9 @@ import io.ktor.server.netty.*
 import com.uspcards.modules.configureNoteRouting
 import com.uspcards.services.NoteService
 
+import com.uspcards.modules.configureUserRouting
+import com.uspcards.services.UserService
+
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.plugins.contentnegotiation.*
 import org.jetbrains.exposed.sql.Database
@@ -30,9 +33,12 @@ fun Application.module() {
         password = ""
     )
     val service = NoteService(database)
+    val userService = UserService(database)
+
 
     configureHTTP()
     configureRouting()
     configureSerialization()
     configureNoteRouting(service)
+    configureUserRouting(userService)
 }
