@@ -5,6 +5,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 class NoteResponse(
     val id: String,
-    val title: String,
-    val message: String
+    val titleFront: String,
+    val messageFront: String,
+    val titleBack: String,
+    val messageBack: String
 )
