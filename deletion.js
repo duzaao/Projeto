@@ -10,12 +10,12 @@ function createAndDisplayCards(data) {
         cardElement.innerHTML = `
             <div class="flip-card-inner">
                 <div class="flip-card-front">
-                    <h1>${card.title}</h1>
-                    <p>${card.message}</p>
+                    <h1>${card.titleFront}</h1>
+                    <p>${card.messageFront}</p>
                 </div>
                 <div class="flip-card-back">
-                    <h1>${card.title}</h1>
-                    <p>${card.message}</p>
+                    <h1>${card.titleBack}</h1>
+                    <p>${card.messageBack}</p>
                 </div>
             </div>
         `;

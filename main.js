@@ -184,7 +184,7 @@ function addNewCard(data, titleFront, messageFront, titleBack, messageBack, i, l
             });
     }
     // Você ainda pode acessar a variável data aqui fora do bloco if
-    console.log(data); // Aqui você verá os dados originais
+    console.log(data[1]); // Aqui você verá os dados originais
 
 
   
@@ -219,7 +219,7 @@ function addNewCard(data, titleFront, messageFront, titleBack, messageBack, i, l
         setTimeout(function() {
             newCard.remove();
             i = (i + 1) % length;
-            addNewCard(data,data[i].title, data[i].message, data[i].title, data[i].message, i, length, false);
+            addNewCard(data,data[i].titleFront, data[i].messageFront, data[i].titleBack, data[i].messageBack, i, length, false);
         }, 300);
     });
 
@@ -230,7 +230,7 @@ function addNewCard(data, titleFront, messageFront, titleBack, messageBack, i, l
         setTimeout(function() {
             newCard.remove();
             i = (i + 1) % length;
-            addNewCard(data,data[i].title, data[i].message, data[i].title, data[i].message, i, length, false);
+            addNewCard(data,data[i].titleFront, data[i].messageFront, data[i].titleBack, data[i].messageBack, i, length, false);
         }, 300);
     });
 
@@ -249,7 +249,7 @@ function addNewCard(data, titleFront, messageFront, titleBack, messageBack, i, l
 }
 
 function setCards(data, i, length) {
-   addNewCard(data,data[i].title, data[i].message, data[i].title, data[i].message, i, length,true);
+   addNewCard(data,data[i].titleFront, data[i].messageFront, data[i].titleBack, data[i].messageBack, i, length,true);
     
 }
 
@@ -311,10 +311,11 @@ function setCards(data, i, length) {
 
    document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.submit-button').addEventListener('click', function() {
-        var titleFront = document.getElementById('titleFront').value;
-        var messageFront = document.getElementById('messageFront').value;
-        var titleBack = document.getElementById('titleBack').value;
-        var messageBack = document.getElementById('messageBack').value;
+        var TitluloFrente = document.getElementById('titleFront').value;
+        var MensagemFrente = document.getElementById('messageFront').value;
+        var TituloTras = document.getElementById('titleBack').value;
+        var MensagemTras = document.getElementById('messageBack').value;
+        
         
 
         if (titleFront === '') {
@@ -323,8 +324,10 @@ function setCards(data, i, length) {
         }
 
         var data = {
-            title: titleFront,
-            message: messageFront
+            titleFront: TitluloFrente,
+            messageFront: MensagemFrente,
+            titleBack: TituloTras,
+            messageBack: MensagemTras,
         };
         console.log(data);
 
