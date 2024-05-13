@@ -6,8 +6,10 @@ import java.util.UUID
 
 @Serializable
 class NoteRequest(
-    val title: String,
-    val message: String
+    val titleFront: String,
+    val messageFront: String,
+    val titleBack: String,
+    val messageBack: String
 )
 
 fun NoteRequest.toNote(
@@ -15,7 +17,9 @@ fun NoteRequest.toNote(
 ): Note {
     return Note(
         id = id,
-        title = title,
-        message = message
+        titleFront = titleFront,
+        messageFront = messageFront,
+        titleBack = messageBack,
+        messageBack = messageBack
     )
 }
