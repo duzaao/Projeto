@@ -19,7 +19,7 @@ fun NoteRequest.toNote(
         id = id,
         titleFront = titleFront,
         messageFront = messageFront,
-        titleBack = messageBack,
+        titleBack = titleBack,
         messageBack = messageBack
     )
 }
