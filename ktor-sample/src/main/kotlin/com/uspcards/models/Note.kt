@@ -5,14 +5,18 @@ import java.util.*
 
 class Note(
     val id: UUID = UUID.randomUUID(),
-    val title: String,
-    val message: String
+    val titleFront: String,
+    val messageFront: String,
+    val titleBack: String,
+    val messageBack: String
 )
 
 fun Note.toNoteResponse(): NoteResponse {
     return NoteResponse(
         id = id.toString(),
-        title = title,
-        message = message
+        titleFront = titleFront,
+        messageFront = messageFront,
+        titleBack = titleBack,
+        messageBack = messageBack
     )
 }
