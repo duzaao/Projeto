@@ -13,6 +13,7 @@ class NoteService(database: Database) {
 
     private object Notes : Table() {
         val id = uuid("id")
+        var userId = uuid("userId")
         val titleFront = varchar("titleFront", 255)
         val messageFront = varchar("messageFront", length = 255)
         val titleBack = varchar("titleBack", length = 255)
@@ -30,22 +31,23 @@ class NoteService(database: Database) {
     private suspend fun <T> dbQuery(block: suspend () -> T): T =
         newSuspendedTransaction(Dispatchers.IO) { block() }
 
-    suspend fun findAll(): List<Note> = dbQuery {
-        Notes.selectAll()
+    suspend fun findAll(userId: UUID): List<Note> = dbQuery {
+        Notes.select{Notes.userId eq userId}
             .map { row -> row.toNote() }
     }
 
-    suspend fun findById(id: UUID): Note? {
+    suspend fun findById(userId:UUID, id: UUID): Note? {
         return dbQuery {
-            Notes.select { Notes.id eq id }
+            Notes.select { (Notes.userId eq userId) and (Notes.id eq id) }
                 .map { row -> row.toNote() }
                 .singleOrNull()
         }
     }
 
-    suspend fun save(note: Note): Note = dbQuery {
+    suspend fun save(userId: UUID, note: Note): Note = dbQuery {
         Notes.insertIgnore {
             it[id] = note.id
+            it[Notes.userId] = userId
             it[titleFront] = note.titleFront
             it[messageFront] = note.messageFront
             it[titleBack] = note.titleBack
@@ -61,9 +63,9 @@ class NoteService(database: Database) {
         }
     }
 
-    suspend fun delete(id: UUID) {
+    suspend fun delete(userId: UUID, id: UUID) {
         dbQuery {
-            Notes.deleteWhere { Notes.id.eq(id) }
+            Notes.deleteWhere { (Notes.userId eq userId) and ( Notes.id.eq(id)) }
         }
     }
 
