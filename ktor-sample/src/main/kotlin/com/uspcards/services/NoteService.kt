@@ -13,8 +13,10 @@ class NoteService(database: Database) {
 
     private object Notes : Table() {
         val id = uuid("id")
-        val title = varchar("title", 255)
-        val message = text("message")
+        val titleFront = varchar("titleFront", 255)
+        val messageFront = varchar("messageFront", length = 255)
+        val titleBack = varchar("titleBack", length = 255)
+        val messageBack = varchar("messageBack", length = 255)
 
         override val primaryKey = PrimaryKey(id)
     }
@@ -44,13 +46,17 @@ class NoteService(database: Database) {
     suspend fun save(note: Note): Note = dbQuery {
         Notes.insertIgnore {
             it[id] = note.id
-            it[title] = note.title
-            it[message] = note.message
+            it[titleFront] = note.titleFront
+            it[messageFront] = note.messageFront
+            it[titleBack] = note.titleBack
+            it[messageBack] = note.messageBack
         }.let {
             Note(
                 id = it[Notes.id],
-                title = it[Notes.title],
-                message = it[Notes.message]
+                titleFront = it[Notes.titleFront],
+                messageFront = it[Notes.messageFront],
+                titleBack = it[Notes.titleBack],
+                messageBack = it[Notes.messageBack]
             )
         }
     }
@@ -63,8 +69,10 @@ class NoteService(database: Database) {
 
     private fun ResultRow.toNote() = Note(
         id = this[Notes.id],
-        title = this[Notes.title],
-        message = this[Notes.message]
+        titleFront = this[Notes.titleFront],
+        messageFront = this[Notes.messageFront],
+        titleBack = this[Notes.titleBack],
+        messageBack = this[Notes.messageBack]
     )
 
 }
