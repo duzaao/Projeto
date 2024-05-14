@@ -52,6 +52,7 @@
                                 <input type="text" name="credenciais[email]" id="email" placeholder="Email">
                                 <input type="password" name="credenciais[senha]" id="senha" placeholder="Senha">
                                 <input type="submit" name="submit" value="Enviar">
+
                             </fieldset>
                         </form>
                     </div>
@@ -62,6 +63,8 @@
             </div>
         </div>
     </div>
+
+    
 
     <div class="titulo-heroi">
         <h1 id="titulo-heroi" class="titulo-heroi text-align-center"></h1>
@@ -130,70 +133,107 @@
 
     <script src="main.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var formCadastro = document.getElementById('cadastro');
-        var formLogin = document.getElementById('login');
+    var formCadastro = document.getElementById('cadastro');
+var formLogin = document.getElementById('login');
 
-        formCadastro.addEventListener('submit', function(event) {
-            event.preventDefault();
-            var email = document.querySelector('#email').value;
-            var senha = document.querySelector('#senha').value;
+// Função para redirecionar para oi.html
+function redirectToOi() {
+    window.location.href = 'oi.html';
+}
 
-            fetch('/inscrever', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: email, password: senha }),
-            })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        });
+formCadastro.addEventListener('submit', function(event) {
+    event.preventDefault();
+    var email = document.querySelector('#modal-cadastro #email').value; // Seleciona o campo de e-mail dentro do modal de cadastro
+    var senha = document.querySelector('#modal-cadastro #senha').value; // Seleciona o campo de senha dentro do modal de cadastro
 
-        formLogin.addEventListener('submit', function(event) {
-            event.preventDefault();
-            var email = document.querySelector('#email').value;
-            var senha = document.querySelector('#senha').value;
+    var data = {
+        username: email,
+        password: senha
+    }
 
-            fetch('/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: email, password: senha }),
-            })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        });
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        var formCadastro = document.getElementById('cadastro');
-        var formLogin = document.getElementById('login');
-
-        // Função para redirecionar para oi.html
-        function redirectToOi() {
-            window.location.href = 'oi.html';
+    fetch('http://localhost:8080/user', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => {
+        if (response.ok) {
+            // Se o cadastro for bem-sucedido, redireciona para oi.html
+            redirectToOi();
+        } else {
+            // Se houver algum erro, exibe uma mensagem de erro
+            console.error('Erro ao cadastrar usuário');
         }
+    })
+    .catch((error) => {
+        console.error('Erro:', error);
+    });
 
-        formCadastro.addEventListener('submit', function(event) {
-            event.preventDefault();
-            // Aqui você pode adicionar a lógica de envio dos dados do formulário de cadastro, se necessário
-            redirectToOi();
-        });
+    // Fecha o quadrado após o envio do formulário
+    fecharQuadrado();
+});
 
-        formLogin.addEventListener('submit', function(event) {
-            event.preventDefault();
-            // Aqui você pode adicionar a lógica de envio dos dados do formulário de login, se necessário
-            redirectToOi();
+
+document.addEventListener('DOMContentLoaded', function() {
+    var formLogin = document.getElementById('login');
+
+    // Função para criar e exibir um aviso
+    function showWarning(message) {
+        // Cria um elemento <div> para o aviso
+        var warningDiv = document.createElement('div');
+        warningDiv.classList.add('alert'); // Adiciona a classe 'alert'
+        warningDiv.textContent = message; // Define o texto do aviso
+
+        // Adiciona o aviso ao final do formulário de login
+        formLogin.appendChild(warningDiv);
+
+        // Remove o aviso após 5 segundos
+        setTimeout(function() {
+            formLogin.removeChild(warningDiv);
+        }, 5000);
+    }
+
+    // Função para redirecionar para oi.html com o ID do usuário
+    function redirectToOi(userId) {
+        // Salva o ID do usuário no armazenamento local
+        localStorage.setItem('userId', userId);
+
+        // Redireciona para oi.html
+        window.location.href = 'oi.html';
+    }
+
+    formLogin.addEventListener('submit', function(event) {
+        event.preventDefault();
+        var email = document.querySelector('#modal-login #email').value; // Seleciona o campo de e-mail dentro do modal de login
+        var senha = document.querySelector('#modal-login #senha').value; // Seleciona o campo de senha dentro do modal de login
+
+        // Realiza uma solicitação GET para obter a lista de todos os usuários
+        fetch('http://localhost:8080/users')
+        .then(response => response.json())
+        .then(users => {
+            // Verifica se existe algum usuário com o email e senha fornecidos
+            var user = users.find(user => user.username === email && user.password === senha);
+            if (user) {
+                // Se o usuário existir e a senha estiver correta, redireciona para oi.html com o ID do usuário
+                redirectToOi(user.id);
+            } else {
+                // Se o usuário não existir ou a senha estiver incorreta, exibe um aviso
+                showWarning('Email ou senha incorretos.');
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            // Exibe um aviso genérico caso ocorra algum erro na solicitação
+            showWarning('Erro ao tentar fazer login. Por favor, tente novamente mais tarde.');
         });
     });
+});
+
+
+
+
     </script>
 </body>
 
