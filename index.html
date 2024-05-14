@@ -132,6 +132,8 @@
 
 
     <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+
     <script>
     var formCadastro = document.getElementById('cadastro');
 var formLogin = document.getElementById('login');
@@ -146,10 +148,14 @@ formCadastro.addEventListener('submit', function(event) {
     var email = document.querySelector('#modal-cadastro #email').value; // Seleciona o campo de e-mail dentro do modal de cadastro
     var senha = document.querySelector('#modal-cadastro #senha').value; // Seleciona o campo de senha dentro do modal de cadastro
 
+    // Criptografar a senha utilizando SHA-256
+    var senhaCriptografada = sha256(senha);
+
     var data = {
         username: email,
-        password: senha
+        password: senhaCriptografada
     }
+    console.log(data);
 
     fetch('http://localhost:8080/user', {
         method: 'POST',
@@ -160,8 +166,7 @@ formCadastro.addEventListener('submit', function(event) {
     })
     .then(response => {
         if (response.ok) {
-            // Se o cadastro for bem-sucedido, redireciona para oi.html
-            redirectToOi();
+            fecharQuadrado();
         } else {
             // Se houver algum erro, exibe uma mensagem de erro
             console.error('Erro ao cadastrar usuário');
@@ -171,8 +176,6 @@ formCadastro.addEventListener('submit', function(event) {
         console.error('Erro:', error);
     });
 
-    // Fecha o quadrado após o envio do formulário
-    fecharQuadrado();
 });
 
 
@@ -209,12 +212,18 @@ document.addEventListener('DOMContentLoaded', function() {
         var email = document.querySelector('#modal-login #email').value; // Seleciona o campo de e-mail dentro do modal de login
         var senha = document.querySelector('#modal-login #senha').value; // Seleciona o campo de senha dentro do modal de login
 
+        // Criptografar a senha utilizando SHA-256
+        var senhaCriptografada = sha256(senha);
+
         // Realiza uma solicitação GET para obter a lista de todos os usuários
         fetch('http://localhost:8080/users')
         .then(response => response.json())
         .then(users => {
             // Verifica se existe algum usuário com o email e senha fornecidos
-            var user = users.find(user => user.username === email && user.password === senha);
+            console.log(users);
+
+            var user = users.find(user => user.username === email && user.password === senhaCriptografada);
+            console.log(user);
             if (user) {
                 // Se o usuário existir e a senha estiver correta, redireciona para oi.html com o ID do usuário
                 redirectToOi(user.id);
@@ -230,11 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
-
-
-
-    </script>
+</script>
 </body>
 
 

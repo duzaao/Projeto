@@ -83,19 +83,21 @@
 </body>
 <script src="main.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     var logoutButton = document.getElementById('logoutButton');
 
     logoutButton.addEventListener('click', function() {
         // Exibe um aviso de confirmação
         var confirmLogout = confirm('Tem certeza que deseja sair?');
 
-        // Se o usuário confirmar, redireciona para index.html
+        // Se o usuário confirmar, remove o userId do localStorage e redireciona para index.html
         if (confirmLogout) {
+            localStorage.removeItem('userId');
             window.location.href = 'index.html';
         }
     });
 });
+
 
 </script>
 </html>

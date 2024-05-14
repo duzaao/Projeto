@@ -31,7 +31,19 @@ function createAndDisplayCards(data) {
 }
 
 function deleteCard(cardId) {
-    fetch(`http://localhost:8080/notes/${cardId}`, {
+    var userId = localStorage.getItem('userId');
+
+    // Verificar se o userId foi obtido corretamente
+    if (!userId) {
+        console.error('Erro: userId não encontrado no localStorage');
+        return;
+    }
+
+    // Construir a URL com o userId
+    var url = 'http://localhost:8080/users/' + userId + '/notes';
+    
+    // Fazer o fetch para deletar a nota com o cardId especificado
+    fetch(`${url}/${cardId}`, {
         method: 'DELETE',
     })
     .then(response => {
@@ -47,8 +59,19 @@ function deleteCard(cardId) {
     });
 }
 
+
 function fetchCardsAndUpdate() {
-    fetch('http://localhost:8080/notes')
+    var userId = localStorage.getItem('userId');
+
+    // Verificar se o userId foi obtido corretamente
+    if (!userId) {
+        console.error('Erro: userId não encontrado no localStorage');
+        return;
+    }
+
+    // Construir a URL com o userId
+    var url = 'http://localhost:8080/users/' + userId + '/notes';
+    fetch(url)
     .then(response => {
         if (!response.ok) {
             throw new Error('Erro ao obter os dados');
@@ -80,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Se o usuário confirmar, redireciona para index.html
         if (confirmLogout) {
+            localStorage.removeItem('userId');
             window.location.href = 'index.html';
         }
     });

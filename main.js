@@ -164,7 +164,17 @@ card.addEventListener('click', function() {
 function addNewCard(data, titleFront, messageFront, titleBack, messageBack, i, length, ATUALIZADO) {
     // Chama a função para atualizar os dados apenas se ATUALIZADO for falso
     if (ATUALIZADO === false) {
-        fetch('http://localhost:8080/notes')
+        var userId = localStorage.getItem('userId');
+
+        // Verificar se o userId foi obtido corretamente
+        if (!userId) {
+            console.error('Erro: userId não encontrado no localStorage');
+            return;
+        }
+
+        // Construir a URL com o userId
+        var url = 'http://localhost:8080/users/' + userId + '/notes';
+        fetch(url)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao obter os dados');
@@ -254,7 +264,17 @@ function setCards(data, i, length) {
 }
 
     function fetchNotesAndAddCards() {
-        fetch('http://localhost:8080/notes')
+        var userId = localStorage.getItem('userId');
+
+        // Verificar se o userId foi obtido corretamente
+        if (!userId) {
+            console.error('Erro: userId não encontrado no localStorage');
+            return;
+        }
+
+        // Construir a URL com o userId
+        var url = 'http://localhost:8080/users/' + userId + '/notes';
+        fetch(url)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao obter os dados');
@@ -272,7 +292,18 @@ function setCards(data, i, length) {
 
     async function fetchNewData() {
         try {
-            const response = await fetch('http://localhost:8080/notes');
+            var userId = localStorage.getItem('userId');
+
+            // Verificar se o userId foi obtido corretamente
+            if (!userId) {
+                console.error('Erro: userId não encontrado no localStorage');
+                return;
+            }
+    
+            // Construir a URL com o userId
+            var url = 'http://localhost:8080/users/' + userId + '/notes';
+            
+            const response = await fetch(url);
             console.log(response);
             if (!response.ok) {
                 throw new Error('Erro ao obter a nova data');
@@ -330,8 +361,19 @@ function setCards(data, i, length) {
             messageBack: MensagemTras,
         };
         console.log(data);
+        var userId = localStorage.getItem('userId');
 
-        fetch('http://localhost:8080/notes', { 
+        // Verificar se o userId foi obtido corretamente
+        if (!userId) {
+            console.error('Erro: userId não encontrado no localStorage');
+            return;
+        }
+
+        // Construir a URL com o userId
+        var url = 'http://localhost:8080/users/' + userId + '/notes';
+        
+
+        fetch(url, { 
             method: 'POST', 
             headers: {'Content-Type': 'application/json'}, 
             body: JSON.stringify(data)

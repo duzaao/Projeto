@@ -14,7 +14,7 @@ class UserService (database: Database){
     private object Users: Table(){
         val id = uuid("id").default(UUID.randomUUID())
         val username = varchar("username", 50)
-        val password = varchar("password", 50)
+        val password = varchar("password", 300)
 
         override val primaryKey = PrimaryKey(id)
     }
