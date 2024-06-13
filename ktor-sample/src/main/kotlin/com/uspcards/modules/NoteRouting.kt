@@ -44,6 +44,7 @@ fun Application.configureNoteRouting(
                 val response = service.save(userId, note).toNoteResponse()
                 call.respond(HttpStatusCode.Created, response)
             }
+
             put("/{noteId}") {
                 val userId = call.parameters["userId"]?.let { UUID.fromString(it) }
                     ?: throw IllegalArgumentException("Invalid User ID")
@@ -51,9 +52,13 @@ fun Application.configureNoteRouting(
                     ?: throw IllegalArgumentException("Invalid Note ID")
                 val noteRequest = call.receive<NoteRequest>()
                 val note = noteRequest.toNote(noteId)
-                val response = service.save(userId, note).toNoteResponse()
+
+                val response = service.update(userId, note).toNoteResponse()
+
                 call.respond(HttpStatusCode.OK, response)
             }
+
+
 
             delete("/{noteId}") {
                 val userId = call.parameters["userId"]?.let { UUID.fromString(it) }

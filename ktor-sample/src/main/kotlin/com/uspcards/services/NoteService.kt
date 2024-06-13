@@ -39,7 +39,7 @@ class NoteService(database: Database) {
 
     suspend fun findAllOrderedByPriority(userId: UUID): List<Note> = dbQuery {
         Notes.select { Notes.userId eq userId }
-            .orderBy(Notes.priority to SortOrder.ASC)
+            .orderBy(Notes.priority to SortOrder.DESC)
             .map { row -> row.toNote() }
     }
 
@@ -71,6 +71,34 @@ class NoteService(database: Database) {
             )
         }
     }
+
+    suspend fun update(userId: UUID, note: Note): Note = dbQuery {
+        val updatedRows = Notes.update({ Notes.id eq note.id }) {
+            it[Notes.userId] = userId
+            it[titleFront] = note.titleFront
+            it[messageFront] = note.messageFront
+            it[titleBack] = note.titleBack
+            it[messageBack] = note.messageBack
+            it[priority] = note.priority
+        }
+
+        if (updatedRows > 0) {
+            // Retorne a nota atualizada
+            Notes.select { Notes.id eq note.id }.map {
+                Note(
+                    id = it[Notes.id],
+                    titleFront = it[Notes.titleFront],
+                    messageFront = it[Notes.messageFront],
+                    titleBack = it[Notes.titleBack],
+                    messageBack = it[Notes.messageBack],
+                    priority = it[Notes.priority]
+                )
+            }.single()
+        } else {
+            throw IllegalArgumentException("Note not found")
+        }
+    }
+
 
     suspend fun delete(userId: UUID, id: UUID) {
         dbQuery {
