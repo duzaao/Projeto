@@ -21,7 +21,7 @@ fun Application.configureNoteRouting(
             get {
                 val userId = call.parameters["userId"]?.let { UUID.fromString(it) }
                     ?: throw IllegalArgumentException("Invalid User ID")
-                val notes = service.findAll(userId)
+                val notes = service.findAllOrderedByPriority(userId)
                 call.respond(HttpStatusCode.OK, notes.map { it.toNoteResponse() })
             }
             get("/{id}") {

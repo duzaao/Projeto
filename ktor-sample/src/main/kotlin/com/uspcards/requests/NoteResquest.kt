@@ -9,7 +9,8 @@ class NoteRequest(
     val titleFront: String,
     val messageFront: String,
     val titleBack: String,
-    val messageBack: String
+    val messageBack: String,
+    val priority : Int
 )
 
 fun NoteRequest.toNote(
@@ -20,6 +21,7 @@ fun NoteRequest.toNote(
         titleFront = titleFront,
         messageFront = messageFront,
         titleBack = titleBack,
-        messageBack = messageBack
+        messageBack = messageBack,
+        priority = priority
     )
 }

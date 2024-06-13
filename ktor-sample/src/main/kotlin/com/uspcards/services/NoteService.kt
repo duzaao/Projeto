@@ -18,6 +18,7 @@ class NoteService(database: Database) {
         val messageFront = varchar("messageFront", length = 255)
         val titleBack = varchar("titleBack", length = 255)
         val messageBack = varchar("messageBack", length = 255)
+        val priority = integer("priority")
 
         override val primaryKey = PrimaryKey(id)
     }
@@ -33,6 +34,12 @@ class NoteService(database: Database) {
 
     suspend fun findAll(userId: UUID): List<Note> = dbQuery {
         Notes.select{Notes.userId eq userId}
+            .map { row -> row.toNote() }
+    }
+
+    suspend fun findAllOrderedByPriority(userId: UUID): List<Note> = dbQuery {
+        Notes.select { Notes.userId eq userId }
+            .orderBy(Notes.priority to SortOrder.ASC)
             .map { row -> row.toNote() }
     }
 
@@ -52,13 +59,15 @@ class NoteService(database: Database) {
             it[messageFront] = note.messageFront
             it[titleBack] = note.titleBack
             it[messageBack] = note.messageBack
+            it[priority] = note.priority
         }.let {
             Note(
                 id = it[Notes.id],
                 titleFront = it[Notes.titleFront],
                 messageFront = it[Notes.messageFront],
                 titleBack = it[Notes.titleBack],
-                messageBack = it[Notes.messageBack]
+                messageBack = it[Notes.messageBack],
+                priority = it[Notes.priority]
             )
         }
     }
@@ -74,7 +83,8 @@ class NoteService(database: Database) {
         titleFront = this[Notes.titleFront],
         messageFront = this[Notes.messageFront],
         titleBack = this[Notes.titleBack],
-        messageBack = this[Notes.messageBack]
+        messageBack = this[Notes.messageBack],
+        priority = this[Notes.priority]
     )
 
 }

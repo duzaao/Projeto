@@ -8,7 +8,8 @@ class Note(
     val titleFront: String,
     val messageFront: String,
     val titleBack: String,
-    val messageBack: String
+    val messageBack: String,
+    val priority : Int
 )
 
 fun Note.toNoteResponse(): NoteResponse {
@@ -17,6 +18,7 @@ fun Note.toNoteResponse(): NoteResponse {
         titleFront = titleFront,
         messageFront = messageFront,
         titleBack = titleBack,
-        messageBack = messageBack
+        messageBack = messageBack,
+        priority = priority
     )
 }
