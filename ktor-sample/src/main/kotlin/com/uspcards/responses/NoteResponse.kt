@@ -9,5 +9,5 @@ class NoteResponse(
     val messageFront: String,
     val titleBack: String,
     val messageBack: String,
-    val priority : Int
+    val priority: Int
 )

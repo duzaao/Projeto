@@ -160,6 +160,65 @@ card.addEventListener('click', function() {
 });
 
 
+async function updatePriority(direction, data, card, i) {
+
+    if (!card) {
+        console.error('Card indefinido em updatePriority');
+        return;
+    }
+
+    var currentPriority = data[i].priority;
+    if (isNaN(currentPriority)) {
+        console.error('Prioridade atual inválida');
+        return;
+    }
+
+    var noteId = data[i].id;
+    var newPriority = (direction === 'left') ? currentPriority + 1 : currentPriority - 1;
+    var userId = localStorage.getItem('userId');
+    
+    if (!userId || !noteId) {
+        console.error('Erro: userId ou noteId não encontrado');
+        return;
+    }
+
+    // Atualiza a prioridade no objeto data[i]
+    data[i].priority = newPriority;
+
+    var data2 = {
+        messageBack: data[i].messageBack,
+        messageFront: data[i].messageFront,
+        titleFront: data[i].titleFront,
+        priority: data[i].priority,
+        titleBack: data[i].titleBack,
+    };
+
+
+    var url = 'http://localhost:8080/users/' + userId + '/notes/' + noteId;
+
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data2), // Envie apenas os dados atualizados da nota
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao atualizar a prioridade');
+        }
+
+
+
+    } catch (error) {
+        console.error('Erro na requisição:', error);
+    }
+}
+
+
+
+
 
 function addNewCard(data, titleFront, messageFront, titleBack, messageBack, i, length, ATUALIZADO) {
     // Chama a função para atualizar os dados apenas se ATUALIZADO for falso
@@ -186,7 +245,7 @@ function addNewCard(data, titleFront, messageFront, titleBack, messageBack, i, l
                 data = updatedData;
                 length = data.length;
 
-                console.log(data); // Aqui você verá os dados atualizados
+                
                 // Agora você pode chamar addNewCard ou fazer qualquer outra coisa com os dados atualizados
             })
             .catch(error => {
@@ -194,7 +253,6 @@ function addNewCard(data, titleFront, messageFront, titleBack, messageBack, i, l
             });
     }
     // Você ainda pode acessar a variável data aqui fora do bloco if
-    console.log(data[1]); // Aqui você verá os dados originais
 
 
   
@@ -224,6 +282,8 @@ function addNewCard(data, titleFront, messageFront, titleBack, messageBack, i, l
 
     newSwipeLeft.addEventListener('click', function(event) {
         event.stopPropagation();
+        console.log(data[i].id);
+        updatePriority('left', data,data[i].id,i);
         var moveOutWidth = document.body.clientWidth;
         newCardInner.style.transform = 'translate(-' + moveOutWidth + 'px) rotateY(0deg)';
         setTimeout(function() {
@@ -235,6 +295,7 @@ function addNewCard(data, titleFront, messageFront, titleBack, messageBack, i, l
 
     newSwipeRight.addEventListener('click', function(event) {
         event.stopPropagation();
+        updatePriority('right',data,data[i].id,i);
         var moveOutWidth = document.body.clientWidth;
         newCardInner.style.transform = 'translate(' + moveOutWidth + 'px) rotateY(0deg)';
         setTimeout(function() {
@@ -332,12 +393,6 @@ function setCards(data, i, length) {
     }
     
 
-    
-    
-
-
-   // fetchNotesAndAddCards();
-
 
 
    document.addEventListener('DOMContentLoaded', function() {
@@ -351,16 +406,16 @@ function setCards(data, i, length) {
 
         if (titleFront === '') {
             alert('Por favor, preencha todos os campos.');
-            return; // Impede o envio do formulário se algum campo estiver vazio
+            return;     
         }
-
         var data = {
             titleFront: TitluloFrente,
             messageFront: MensagemFrente,
             titleBack: TituloTras,
             messageBack: MensagemTras,
+            priority: localStorage.getItem('selectedNumber')
         };
-        console.log(data);
+        
         var userId = localStorage.getItem('userId');
 
         // Verificar se o userId foi obtido corretamente

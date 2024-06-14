@@ -9,7 +9,7 @@ class Note(
     val messageFront: String,
     val titleBack: String,
     val messageBack: String,
-    val priority : Int
+    val priority: Int
 )
 
 fun Note.toNoteResponse(): NoteResponse {

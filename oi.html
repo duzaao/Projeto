@@ -72,6 +72,13 @@
 
 
         </div>
+            <div class="number-buttons">
+                <button class="number-button" id="button1" onclick="selectNumber(1)">Muito Fácil</button>
+                <button class="number-button" id="button2" onclick="selectNumber(2)">Fácil</button>
+                <button class="number-button" id="button3" onclick="selectNumber(3)">Médio</button>
+                <button class="number-button" id="button4" onclick="selectNumber(4)">Difícil</button>
+                <button class="number-button" id="button5" onclick="selectNumber(5)">Muito Difícil</button>
+            </div>
         <div id="mensagem" class="mensagem" style="display: none;">Usp-card enviado com sucesso</div>
 
     </div>
@@ -82,6 +89,28 @@
 
 </body>
 <script src="main.js"></script>
+    <script>
+        function selectNumber(num) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.number-button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Add active class to clicked button
+            document.getElementById('button' + num).classList.add('active');
+
+            // Save the selected number in localStorage
+            localStorage.setItem('selectedNumber', num);
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Check if there is already a selected number in localStorage
+            const selectedNumber = localStorage.getItem('selectedNumber') || 3;
+
+            // Set the default selected number to 5 if not already set
+            selectNumber(selectedNumber);
+        });
+    </script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var logoutButton = document.getElementById('logoutButton');
