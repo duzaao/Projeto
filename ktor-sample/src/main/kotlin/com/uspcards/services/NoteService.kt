@@ -38,7 +38,7 @@ class NoteService(database: Database) {
     }
 
     suspend fun findAllOrderedByPriority(userId: UUID): List<Note> = dbQuery {
-        Notes.select { Notes.userId eq userId }
+        Notes.select { (Notes.userId eq userId) and (Notes.priority greater 0) }
             .orderBy(Notes.priority to SortOrder.DESC)
             .map { row -> row.toNote() }
     }
